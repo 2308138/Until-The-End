@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float dashCooldown = 0F;
 
     [SerializeField][HideInInspector] private float lastDashTime = 0F;
-    [SerializeField][HideInInspector] private bool isDashing = false;
+
+    [SerializeField][HideInInspector] public bool isDashing = false;
 
     void Start()
     {

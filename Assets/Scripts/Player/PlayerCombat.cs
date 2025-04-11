@@ -10,8 +10,6 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private Transform playerTransform;
 
-    [SerializeField][HideInInspector] public bool isAttacking = false;
-
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
     [SerializeField] public int currentCombo = 0;
@@ -20,6 +18,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private float damageCooldown = 1F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
     [SerializeField][HideInInspector] private Vector2 lastMoveDirection = Vector2.right;
+
+    [SerializeField][HideInInspector] public bool isAttacking = false;
 
     void Start()
     {

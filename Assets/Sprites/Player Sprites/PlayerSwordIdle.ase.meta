@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8c92816640c8c424a94b89d1d42a97e7
+guid: 6e743d0db385ab64988282f0ece50a6f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638800002333228553
+  platformSettingsDirtyTick: 638800002260198260
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,7 +123,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: PlayerSword
+  - name: Frame_0
     originalName: 
     pivot: {x: 0.2, y: -1.3333334}
     alignment: 9
@@ -135,7 +135,7 @@ ScriptedImporter:
       y: 4
       width: 10
       height: 3
-    spriteID: 5e43d619003452d43987994f7cea45fc
+    spriteID: b80f0df63c5d5bb4abd7f55fdedf70d1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,16 +144,79 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.2, y: -1.6666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 15
+      width: 10
+      height: 3
+    spriteID: fa9570325a387fa4099c831330217484
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 15}
+  - name: Frame_2
+    originalName: 
+    pivot: {x: 0.2, y: -1.6666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 26
+      width: 10
+      height: 3
+    spriteID: 6fe3c00b7b43261489c5d4589e962e2e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 26}
+  - name: Frame_3
+    originalName: 
+    pivot: {x: 0.2, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 37
+      width: 10
+      height: 3
+    spriteID: 4c0f467cd1976c7418d50456114f6a4e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 37}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -312106932
-    name: PlayerSword
+    guid: -1671700526
+    name: PlayerSwordIdle
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: PlayerSword
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -161,7 +224,34 @@ ScriptedImporter:
         y: 4
         width: 10
         height: 3
-      spriteId: 5e43d619003452d43987994f7cea45fc
+      spriteId: b80f0df63c5d5bb4abd7f55fdedf70d1
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 6
+        y: 5
+        width: 10
+        height: 3
+      spriteId: fa9570325a387fa4099c831330217484
+    - name: Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 6
+        y: 5
+        width: 10
+        height: 3
+      spriteId: 6fe3c00b7b43261489c5d4589e962e2e
+    - name: Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 6
+        y: 4
+        width: 10
+        height: 3
+      spriteId: 4c0f467cd1976c7418d50456114f6a4e
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -205,4 +295,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 16, y: 16}
-  previousTextureSize: {x: 32, y: 16}
+  previousTextureSize: {x: 32, y: 64}
