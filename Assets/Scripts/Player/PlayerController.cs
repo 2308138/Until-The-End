@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private Rigidbody2D playerRB;
     [SerializeField][HideInInspector] Vector2 movementInput;
     [SerializeField][HideInInspector] Vector2 lastMoveDirection = Vector2.down;
-    [SerializeField][HideInInspector] private Animator playerAnim;
     [SerializeField][HideInInspector] private Vector2 dashDirection;
 
     [Header("--- Movement Settings ---")]
@@ -25,7 +24,6 @@ public class PlayerController : MonoBehaviour
     {
         playerCol = GetComponent<Collider2D>();
         playerRB = GetComponent<Rigidbody2D>();
-        playerAnim = GetComponent<Animator>();
     }
 
     void Update()
