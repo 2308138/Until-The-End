@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] Vector2 lastMoveDirection = Vector2.down;
     [SerializeField][HideInInspector] private Vector2 dashDirection;
     [SerializeField][HideInInspector] private Animator playerAnimator;
+    [SerializeField][HideInInspector] private SpriteRenderer playerSprite;
 
     [Header("--- Movement Settings ---")]
     [SerializeField] public float moveSpeed = 0F;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         playerCol = GetComponent<Collider2D>();
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponentInChildren<Animator>();
+        playerSprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -42,6 +44,9 @@ public class PlayerController : MonoBehaviour
             lastMoveDirection = movementInput;
         playerRB.linearVelocity = movementInput * moveSpeed;
 
+        if (movementInput.x != 0)
+            transform.localScale = new Vector3(Mathf.Sign(movementInput.x), 1, 1);
+
         bool isMoving = movementInput != Vector2.zero;
         playerAnimator.SetBool("isMoving", isMoving);
     }
@@ -55,6 +60,8 @@ public class PlayerController : MonoBehaviour
             dashDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
             playerCol.enabled = false;
+
+            playerAnimator.SetTrigger("Dash");
         }
 
         playerRB.MovePosition(playerRB.position + movementInput.normalized * moveSpeed * Time.fixedDeltaTime);
