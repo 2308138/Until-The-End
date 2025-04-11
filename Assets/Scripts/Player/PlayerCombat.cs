@@ -7,7 +7,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] public LayerMask enemyLayer;
     [SerializeField] public GameObject[] attackHitbox;
 
-    [SerializeField][HideInInspector] private Animator animator;
+    [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private Transform playerTransform;
 
     [Header("--- Combat Settings ---")]
@@ -22,7 +22,7 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        animator = GetComponent<Animator>();
+        playerAnimator = GetComponentInChildren<Animator>();
         playerTransform = GetComponent<Transform>();
     }
 
@@ -31,7 +31,6 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
         {
             HandleCombo();
-            HandleAnimation();
         }
     }
 
@@ -53,17 +52,14 @@ public class PlayerCombat : MonoBehaviour
             currentCombo++;
             if (currentCombo >= attackHitbox.Length)
                 ResetCombo();
+
+            playerAnimator.SetBool("isAttacking", true);
         }
     }
 
     void ResetCombo()
     {
         currentCombo = 0;
-    }
-
-    void HandleAnimation()
-    {
-
     }
 
     void OnTriggerStay2D(Collider2D other)

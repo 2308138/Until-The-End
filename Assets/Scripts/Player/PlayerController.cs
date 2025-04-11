@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] Vector2 movementInput;
     [SerializeField][HideInInspector] Vector2 lastMoveDirection = Vector2.down;
     [SerializeField][HideInInspector] private Vector2 dashDirection;
+    [SerializeField][HideInInspector] private Animator playerAnimator;
 
     [Header("--- Movement Settings ---")]
     [SerializeField] public float moveSpeed = 0F;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         playerCol = GetComponent<Collider2D>();
         playerRB = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -39,6 +41,9 @@ public class PlayerController : MonoBehaviour
         if (movementInput != Vector2.zero)
             lastMoveDirection = movementInput;
         playerRB.linearVelocity = movementInput * moveSpeed;
+
+        bool isMoving = movementInput != Vector2.zero;
+        playerAnimator.SetBool("isMoving", isMoving);
     }
 
     void HandleDash()
@@ -64,10 +69,5 @@ public class PlayerController : MonoBehaviour
                 playerCol.enabled = true;
             }
         }
-    }
-
-    void HandleAnimation()
-    {
-
     }
 }

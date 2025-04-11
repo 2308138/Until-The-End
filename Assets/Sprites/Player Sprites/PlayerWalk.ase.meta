@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1299290840e0d3341981fdbc8c896545
+guid: 321e43eef81d5134198761435acce8f5
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -98,7 +98,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638797502790243314
+  platformSettingsDirtyTick: 638799955754896321
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -123,9 +123,51 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: PlayerCrosshair
+  - name: Frame_0
     originalName: 
-    pivot: {x: 0.42857146, y: -0.5714286}
+    pivot: {x: 0.375, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 20
+      y: 4
+      width: 8
+      height: 14
+    spriteID: b979d953ac7c57646840590fea8b0a28
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 20, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.375, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 20
+      y: 26
+      width: 8
+      height: 14
+    spriteID: dd8461eea2af7314a9987449de4ce443
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 20, y: 26}
+  - name: Frame_2
+    originalName: 
+    pivot: {x: 0.375, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +175,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 7
-      height: 7
-    spriteID: 5c458370a69e75b44959541f15ef8858
+      width: 8
+      height: 15
+    spriteID: 2f321c46f272c4847bd633d2ea332ebc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,24 +186,72 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_3
+    originalName: 
+    pivot: {x: 0.375, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 27
+      width: 8
+      height: 15
+    spriteID: a31704a3519261f4e808a4eeab65a6cf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 27}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -531789977
-    name: PlayerCrosshair
+    guid: 883294770
+    name: PlayerWalk
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: PlayerCrosshair
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 5
-        y: 4
-        width: 7
-        height: 7
-      spriteId: 5c458370a69e75b44959541f15ef8858
+        y: 0
+        width: 8
+        height: 14
+      spriteId: b979d953ac7c57646840590fea8b0a28
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 5
+        y: 0
+        width: 8
+        height: 14
+      spriteId: dd8461eea2af7314a9987449de4ce443
+    - name: Frame_2
+      frameIndex: 2
+      additiveSortOrder: 0
+      cellRect:
+        x: 5
+        y: 0
+        width: 8
+        height: 15
+      spriteId: 2f321c46f272c4847bd633d2ea332ebc
+    - name: Frame_3
+      frameIndex: 3
+      additiveSortOrder: 0
+      cellRect:
+        x: 5
+        y: 0
+        width: 8
+        height: 15
+      spriteId: a31704a3519261f4e808a4eeab65a6cf
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -205,4 +295,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 16, y: 16}
-  previousTextureSize: {x: 16, y: 16}
+  previousTextureSize: {x: 32, y: 64}
