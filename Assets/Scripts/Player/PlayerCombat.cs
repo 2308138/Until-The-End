@@ -5,10 +5,10 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("--- Misc Settings ---")]
     [SerializeField] public LayerMask enemyLayer;
-    [SerializeField] public GameObject basicAttackHitbox;
-    [SerializeField] public GameObject finalAttackHitbox;
+    [SerializeField] public GameObject[] attackHitbox;
 
     [SerializeField][HideInInspector] private Animator animator;
+    [SerializeField][HideInInspector] private Transform playerTransform;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
@@ -17,16 +17,18 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private int maxHealth = 5;
     [SerializeField][HideInInspector] private float damageCooldown = 1F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
+    [SerializeField][HideInInspector] private Vector2 lastMoveDirection = Vector2.right;
 
     void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        playerTransform = GetComponent<Transform>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K) && currentCombo < 3)
+        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
         {
             HandleCombo();
             HandleAnimation();
@@ -35,51 +37,33 @@ public class PlayerCombat : MonoBehaviour
 
     void HandleCombo()
     {
-        Vector2 direction = transform.position.normalized;
+        if (currentCombo >= attackHitbox.Length)
+            ResetCombo();
 
-        if (currentCombo > 3)
-            return;
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (input != Vector2.zero)
+            lastMoveDirection = input.normalized;
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
         {
+            currentCombo = Mathf.Clamp(currentCombo, 0, attackHitbox.Length - 1);
+            GameObject attack = Instantiate(attackHitbox[currentCombo], playerTransform.position, Quaternion.identity);
+            attack.transform.right = lastMoveDirection;
+
             currentCombo++;
-            currentCombo = Mathf.Clamp(currentCombo, 0, 3);
-
-            switch (currentCombo)
-            {
-                case 1:
-                    StartCoroutine(BasicAttackHitbox(direction));
-                    break;
-                case 2:
-                    StartCoroutine(BasicAttackHitbox(direction));
-                    break;
-                case 3:
-                    StartCoroutine(FinalAttackHitbox(direction));
-                    break;
-            }
+            if (currentCombo >= attackHitbox.Length)
+                ResetCombo();
         }
+    }
 
+    void ResetCombo()
+    {
+        currentCombo = 0;
     }
 
     void HandleAnimation()
     {
 
-    }
-
-    IEnumerator BasicAttackHitbox(Vector2 attackDirection)
-    {
-        basicAttackHitbox.SetActive(true);
-        basicAttackHitbox.transform.position = attackDirection;
-        yield return new WaitForSeconds(0.2F);
-        basicAttackHitbox.SetActive(false);
-    }
-
-    IEnumerator FinalAttackHitbox(Vector2 attackDirection)
-    {
-        finalAttackHitbox.SetActive(true);
-        finalAttackHitbox.transform.position = attackDirection;
-        yield return new WaitForSeconds(0.2F);
-        finalAttackHitbox.SetActive(false);
     }
 
     void OnTriggerStay2D(Collider2D other)

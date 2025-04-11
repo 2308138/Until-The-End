@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         HandleMovement();
         HandleDash();

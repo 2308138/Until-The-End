@@ -21,7 +21,7 @@ public class WaypointController : MonoBehaviour
         GenerateWaypoints();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         AnimateRadius();
         UpdateWaypointPositions();

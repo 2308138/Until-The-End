@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField][HideInInspector] private float damageCooldown = 0.2F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
 
-    void FixedUpdate()
+    void Update()
     {
         if (target == null)
             return;

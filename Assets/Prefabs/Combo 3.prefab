@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8648019060676925241}
   - component: {fileID: 4054376758603045683}
+  - component: {fileID: 2437421312165776614}
   m_Layer: 6
   m_Name: Combo 3
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8648019060676925241
 Transform:
   m_ObjectHideFlags: 0
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8905660136274655890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.17843606, y: -0.9839515, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,3 +79,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &2437421312165776614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905660136274655890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57809cdf024354b47a5c7496220cfd80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 0.2

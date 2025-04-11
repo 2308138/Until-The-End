@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
         waveManager = GameObject.FindObjectOfType<WaveManager>();
     }
 
-    private void FixedUpdate()
+    void Update()
     {
         if (playerHealth != null)
             healthText.text = "Health: " + playerHealth.currentHealth;

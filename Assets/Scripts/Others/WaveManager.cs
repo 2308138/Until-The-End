@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField][HideInInspector] private float waveTimer = 0F;
     [SerializeField][HideInInspector] private int enemiesSpawned = 0;
 
-    void FixedUpdate()
+    void Update()
     {
         if (isWaveActive)
         {
