@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private Vector2 dashDirection;
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private SpriteRenderer playerSprite;
+    [SerializeField][HideInInspector] private PlayerCombat playerCombat;
 
     [Header("--- Movement Settings ---")]
     [SerializeField] public float moveSpeed = 0F;
@@ -28,10 +29,14 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponentInChildren<Animator>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
     void Update()
     {
+        if (playerCombat.isAttacking)
+            return;
+
         HandleMovement();
         HandleDash();
     }

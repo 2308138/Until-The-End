@@ -10,6 +10,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private Transform playerTransform;
 
+    [SerializeField][HideInInspector] public bool isAttacking = false;
+
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
     [SerializeField] public int currentCombo = 0;
@@ -45,6 +47,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
         {
+            isAttacking = true;
             currentCombo = Mathf.Clamp(currentCombo, 0, attackHitbox.Length - 1);
             GameObject attack = Instantiate(attackHitbox[currentCombo], playerTransform.position, Quaternion.identity);
             attack.transform.right = lastMoveDirection;
@@ -53,13 +56,21 @@ public class PlayerCombat : MonoBehaviour
             if (currentCombo >= attackHitbox.Length)
                 ResetCombo();
 
-            playerAnimator.SetBool("isAttacking", true);
+            playerAnimator.SetBool("isAttacking", isAttacking);
+            StartCoroutine(ResetAttackAnimation());
         }
     }
 
     void ResetCombo()
     {
         currentCombo = 0;
+    }
+
+    IEnumerator ResetAttackAnimation()
+    {
+        yield return new WaitForSeconds(0.35F);
+        isAttacking = false;
+        playerAnimator.SetBool("isAttacking", isAttacking);
     }
 
     void OnTriggerStay2D(Collider2D other)
