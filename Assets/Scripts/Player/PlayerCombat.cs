@@ -10,18 +10,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private Transform playerTransform;
     [SerializeField][HideInInspector] private SwordController swordController;
+    [SerializeField][HideInInspector] private PlayerController playerController;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
     [SerializeField] public int currentCombo = 0;
+    [SerializeField] public float lungeForce = 0F;
 
     [SerializeField][HideInInspector] private int maxHealth = 5;
     [SerializeField][HideInInspector] private float damageCooldown = 1F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
     [SerializeField][HideInInspector] private float attackCooldown = 0.3F;
+    [SerializeField][HideInInspector] private float lastAttackTime = -Mathf.Infinity;
 
-    [SerializeField][HideInInspector] public Vector2 lastMoveDirection = Vector2.right;
     [SerializeField][HideInInspector] public bool isAttacking = false;
+    [SerializeField][HideInInspector] public bool IsAttackingOnCooldown() { return Time.time < lastAttackTime + attackCooldown; }
 
     void Start()
     {
@@ -29,14 +32,15 @@ public class PlayerCombat : MonoBehaviour
         playerAnimator = GetComponentInChildren<Animator>();
         playerTransform = GetComponent<Transform>();
         swordController = GetComponentInChildren<SwordController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !IsAttackingOnCooldown())
         {
             HandleCombo();
-            swordController.HandleAnimations(lastMoveDirection);
+            swordController.HandleAnimations(playerController.lastMoveDirection);
         }
     }
 
@@ -45,30 +49,39 @@ public class PlayerCombat : MonoBehaviour
         if (currentCombo >= attackHitbox.Length)
             ResetCombo();
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (input != Vector2.zero)
-            lastMoveDirection = input.normalized;
-
         if (Input.GetKeyDown(KeyCode.K) && currentCombo <= (attackHitbox.Length))
         {
             isAttacking = true;
+            lastAttackTime = Time.time;
             currentCombo++;
+
+            if (playerController.lastMoveDirection != Vector2.zero)
+                playerController.playerRB.linearVelocity += playerController.lastMoveDirection * lungeForce;
 
             int hitboxIndex = Mathf.Clamp(currentCombo - 1, 0, attackHitbox.Length - 1);
             GameObject attack = Instantiate(attackHitbox[hitboxIndex], playerTransform.position, Quaternion.identity);
-            attack.transform.right = lastMoveDirection;
-
-            if (currentCombo >= 4)
-                ResetCombo();
+            attack.transform.right = playerController.lastMoveDirection;
 
             playerAnimator.SetBool("isAttacking", isAttacking);
             StartCoroutine(ResetAttackAnimation());
+
+            Invoke(nameof(EndAttack), attackCooldown);
         }
     }
 
     void ResetCombo()
     {
         currentCombo = 0;
+    }
+
+    void EndAttack()
+    {
+        playerController.playerRB.linearVelocity = Vector2.zero;
+        playerController.canMove = true;
+        isAttacking = false;
+
+        if (currentCombo >= 4)
+            ResetCombo();
     }
 
     IEnumerator ResetAttackAnimation()

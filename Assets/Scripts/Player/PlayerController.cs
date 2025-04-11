@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public LayerMask enemyLayer;
 
     [SerializeField][HideInInspector] private Collider2D playerCol;
-    [SerializeField][HideInInspector] private Rigidbody2D playerRB;
-    [SerializeField][HideInInspector] Vector2 movementInput;
-    [SerializeField][HideInInspector] Vector2 lastMoveDirection = Vector2.down;
     [SerializeField][HideInInspector] private Vector2 dashDirection;
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private SpriteRenderer playerSprite;
     [SerializeField][HideInInspector] private PlayerCombat playerCombat;
+
+    [SerializeField][HideInInspector] public Rigidbody2D playerRB;
+    [SerializeField][HideInInspector] public Vector2 movementInput;
+    [SerializeField][HideInInspector] public Vector2 lastMoveDirection = Vector2.right;
 
     [Header("--- Movement Settings ---")]
     [SerializeField] public float moveSpeed = 0F;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private float lastDashTime = 0F;
 
     [SerializeField][HideInInspector] public bool isDashing = false;
+    [SerializeField][HideInInspector] public bool canMove = true;
 
     void Start()
     {
@@ -35,11 +37,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!canMove)
+            return;
+        
         if (playerCombat.isAttacking)
             return;
 
-        HandleMovement();
-        HandleDash();
+        if (canMove)
+        {
+            HandleMovement();
+            HandleDash();
+        }
     }
 
     void HandleMovement()
