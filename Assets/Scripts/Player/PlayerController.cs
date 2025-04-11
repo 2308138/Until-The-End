@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
             playerCol.enabled = false;
 
-            playerAnimator.SetTrigger("Dash");
+            playerAnimator.SetBool("isDashing", isDashing);
         }
 
         playerRB.MovePosition(playerRB.position + movementInput.normalized * moveSpeed * Time.fixedDeltaTime);
@@ -74,6 +74,8 @@ public class PlayerController : MonoBehaviour
             {
                 isDashing = false;
                 playerCol.enabled = true;
+
+                playerAnimator.SetBool("isDashing", isDashing);
             }
         }
     }
