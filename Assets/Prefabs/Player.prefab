@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4838858251304661121}
   - component: {fileID: 4350288344193987980}
-  - component: {fileID: 1699323812215066792}
+  - component: {fileID: 320457010846779955}
   - component: {fileID: 8974440838157133239}
   m_Layer: 6
   m_Name: Sword
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2478573898309634823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.043, y: 0.189, z: 0}
+  m_LocalPosition: {x: -0.379, y: 0.117, z: 0}
   m_LocalScale: {x: 1.5, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5500581714384776886, guid: 8c92816640c8c424a94b89d1d42a97e7, type: 3}
+  m_Sprite: {fileID: 2008938827021624073, guid: 8c92816640c8c424a94b89d1d42a97e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1699323812215066792
+--- !u!114 &320457010846779955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,9 +98,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2478573898309634823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 466c3d1410e48f54bb85e06d4c4d5749, type: 3}
+  m_Script: {fileID: 11500000, guid: d7ae6e55b51980347a954ae6ab28eef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  playerCombat: {fileID: 0}
+  swordAnimator: {fileID: 0}
 --- !u!95 &8974440838157133239
 Animator:
   serializedVersion: 7
@@ -111,7 +114,7 @@ Animator:
   m_GameObject: {fileID: 2478573898309634823}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f309b10c47a13b348a7ba91929b79e5d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -308,6 +311,7 @@ MonoBehaviour:
   dashDirection: {x: 0, y: 0}
   playerAnimator: {fileID: 0}
   playerSprite: {fileID: 0}
+  playerCombat: {fileID: 0}
   moveSpeed: 5
   dashSpeed: 12
   dashDuration: 0.2
@@ -341,6 +345,7 @@ MonoBehaviour:
   damageCooldown: 1.5
   lastDamageTime: 0
   lastMoveDirection: {x: 1, y: 0}
+  isAttacking: 0
 --- !u!1 &6026616120686567703
 GameObject:
   m_ObjectHideFlags: 0

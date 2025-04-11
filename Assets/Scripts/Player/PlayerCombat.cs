@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private Transform playerTransform;
+    [SerializeField][HideInInspector] private SwordController swordController;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
@@ -17,8 +18,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private int maxHealth = 5;
     [SerializeField][HideInInspector] private float damageCooldown = 1F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
-    [SerializeField][HideInInspector] private Vector2 lastMoveDirection = Vector2.right;
+    [SerializeField][HideInInspector] private float attackCooldown = 0.3F;
 
+    [SerializeField][HideInInspector] public Vector2 lastMoveDirection = Vector2.right;
     [SerializeField][HideInInspector] public bool isAttacking = false;
 
     void Start()
@@ -26,13 +28,15 @@ public class PlayerCombat : MonoBehaviour
         currentHealth = maxHealth;
         playerAnimator = GetComponentInChildren<Animator>();
         playerTransform = GetComponent<Transform>();
+        swordController = GetComponentInChildren<SwordController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
+        if (Input.GetKeyDown(KeyCode.K))
         {
             HandleCombo();
+            swordController.HandleAnimations(lastMoveDirection);
         }
     }
 
@@ -45,15 +49,16 @@ public class PlayerCombat : MonoBehaviour
         if (input != Vector2.zero)
             lastMoveDirection = input.normalized;
 
-        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= 4)
+        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= (attackHitbox.Length))
         {
             isAttacking = true;
-            currentCombo = Mathf.Clamp(currentCombo, 0, attackHitbox.Length - 1);
-            GameObject attack = Instantiate(attackHitbox[currentCombo], playerTransform.position, Quaternion.identity);
+            currentCombo++;
+
+            int hitboxIndex = Mathf.Clamp(currentCombo - 1, 0, attackHitbox.Length - 1);
+            GameObject attack = Instantiate(attackHitbox[hitboxIndex], playerTransform.position, Quaternion.identity);
             attack.transform.right = lastMoveDirection;
 
-            currentCombo++;
-            if (currentCombo >= attackHitbox.Length)
+            if (currentCombo >= 4)
                 ResetCombo();
 
             playerAnimator.SetBool("isAttacking", isAttacking);
