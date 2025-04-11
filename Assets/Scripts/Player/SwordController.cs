@@ -35,7 +35,7 @@ public class SwordController : MonoBehaviour
             Vector3 frontOffset = new Vector3(animationOffset.x, animationOffset.y, 0F);
             swordTransform.localPosition = restingLocalPos + frontOffset;
 
-            Invoke(nameof(ResetPosition), 0.385F);
+            Invoke(nameof(ResetPosition), 0.335F);
 
             int triggerIndex = Mathf.Clamp(playerCombat.currentCombo, 1, 3);
             swordAnimator.SetTrigger("Attack" + triggerIndex);

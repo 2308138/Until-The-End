@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private Transform playerTransform;
     [SerializeField][HideInInspector] private SwordController swordController;
     [SerializeField][HideInInspector] private PlayerController playerController;
+    [SerializeField][HideInInspector] private CameraShake cameraShake;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
@@ -33,6 +35,7 @@ public class PlayerCombat : MonoBehaviour
         playerTransform = GetComponent<Transform>();
         swordController = GetComponentInChildren<SwordController>();
         playerController = GetComponent<PlayerController>();
+        cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     void Update()
@@ -61,6 +64,11 @@ public class PlayerCombat : MonoBehaviour
             int hitboxIndex = Mathf.Clamp(currentCombo - 1, 0, attackHitbox.Length - 1);
             GameObject attack = Instantiate(attackHitbox[hitboxIndex], playerTransform.position, Quaternion.identity);
             attack.transform.right = playerController.lastMoveDirection;
+
+            if (currentCombo == 1 || currentCombo == 2)
+                cameraShake.Shake(0.3F);
+            else if (currentCombo == 3)
+                cameraShake.Shake(0.5F);
 
             playerAnimator.SetBool("isAttacking", isAttacking);
             StartCoroutine(ResetAttackAnimation());
