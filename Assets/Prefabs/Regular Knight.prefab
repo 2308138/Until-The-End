@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   enemySprite: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 3
   currentHealth: 1
   damageCooldown: 0.2
   lastDamageTime: 0
