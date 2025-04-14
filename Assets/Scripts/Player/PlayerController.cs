@@ -56,7 +56,11 @@ public class PlayerController : MonoBehaviour
         movementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (movementInput != Vector2.zero)
+        {
+            movementInput.Normalize();
             lastMoveDirection = movementInput;
+        }
+            
         playerRB.linearVelocity = movementInput * moveSpeed;
 
         if (movementInput.x != 0)
