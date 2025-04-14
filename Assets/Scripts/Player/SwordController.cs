@@ -30,15 +30,24 @@ public class SwordController : MonoBehaviour
     {
         swordAnimator.SetBool("isDashing", playerController.isDashing);
 
+
         if (playerCombat.isAttacking)
         {
             Vector3 frontOffset = new Vector3(animationOffset.x, animationOffset.y, 0F);
             swordTransform.localPosition = restingLocalPos + frontOffset;
 
-            Invoke(nameof(ResetPosition), 0.335F);
-
             int triggerIndex = Mathf.Clamp(playerCombat.currentCombo, 1, 3);
-            swordAnimator.SetTrigger("Attack" + triggerIndex);
+
+            if (triggerIndex <= 2)
+            {
+                Invoke(nameof(ResetPosition), 0.3F);
+                swordAnimator.SetTrigger("Attack" + triggerIndex);
+            }
+            else if (triggerIndex == 3)
+            {
+                Invoke(nameof(ResetPosition), 0.385F);
+                swordAnimator.SetTrigger("Attack" + triggerIndex);
+            }
         }
     }
 
