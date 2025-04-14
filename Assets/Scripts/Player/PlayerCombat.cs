@@ -113,7 +113,6 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        UIManager.UpdateHearts();
 
         if (currentHealth <= 0)
             Die();
