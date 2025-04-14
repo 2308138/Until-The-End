@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private Collider2D playerCol;
     [SerializeField][HideInInspector] private Vector2 dashDirection;
     [SerializeField][HideInInspector] private Animator playerAnimator;
-    [SerializeField][HideInInspector] private SpriteRenderer playerSprite;
     [SerializeField][HideInInspector] private PlayerCombat playerCombat;
     [SerializeField][HideInInspector] private SwordController swordController;
 
@@ -32,7 +31,6 @@ public class PlayerController : MonoBehaviour
         playerCol = GetComponent<Collider2D>();
         playerRB = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponentInChildren<Animator>();
-        playerSprite = GetComponentInChildren<SpriteRenderer>();
         playerCombat = GetComponent<PlayerCombat>();
     }
 

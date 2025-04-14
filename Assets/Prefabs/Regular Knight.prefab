@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6496017963527555758}
   - component: {fileID: 7310384019103163640}
   - component: {fileID: 8067874362066384662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Regular Knight
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3876232807457488539}
   - component: {fileID: 8492755740690308008}
   - component: {fileID: 7786464435546160154}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
