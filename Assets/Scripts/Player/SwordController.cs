@@ -26,11 +26,18 @@ public class SwordController : MonoBehaviour
         
     }
 
-    public void HandleAnimations(Vector2 direction)
+    void Update()
+    {
+        HandleDashAnimation();
+    }
+
+    public void HandleDashAnimation()
     {
         swordAnimator.SetBool("isDashing", playerController.isDashing);
+    }
 
-
+    public void HandleAttackAnimations(Vector2 direction)
+    {
         if (playerCombat.isAttacking)
         {
             Vector3 frontOffset = new Vector3(animationOffset.x, animationOffset.y, 0F);

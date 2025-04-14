@@ -43,7 +43,7 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !IsAttackingOnCooldown())
         {
             HandleCombo();
-            swordController.HandleAnimations(playerController.lastMoveDirection);
+            swordController.HandleAttackAnimations(playerController.lastMoveDirection);
         }
     }
 
@@ -66,9 +66,9 @@ public class PlayerCombat : MonoBehaviour
             attack.transform.right = playerController.lastMoveDirection;
 
             if (currentCombo == 1 || currentCombo == 2)
-                cameraShake.Shake(0.3F);
+                cameraShake.Shake(0.1F);
             else if (currentCombo == 3)
-                cameraShake.Shake(0.5F);
+                cameraShake.Shake(0.3F);
 
             playerAnimator.SetBool("isAttacking", isAttacking);
             StartCoroutine(ResetAttackAnimation());

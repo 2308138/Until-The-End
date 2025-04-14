@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField][HideInInspector] private Animator playerAnimator;
     [SerializeField][HideInInspector] private SpriteRenderer playerSprite;
     [SerializeField][HideInInspector] private PlayerCombat playerCombat;
+    [SerializeField][HideInInspector] private SwordController swordController;
 
     [SerializeField][HideInInspector] public Rigidbody2D playerRB;
     [SerializeField][HideInInspector] public Vector2 movementInput;
