@@ -7,7 +7,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [Header("--- Misc Settings ---")]
-    [SerializeField] public GameObject enemyPrefab;
+    [SerializeField] public GameObject[] enemyPrefabs;
     [SerializeField] public Transform[] spawnPoints;
     [SerializeField] public WaypointController waypointController;
     [SerializeField] public Transform playerTransform;
@@ -56,15 +56,17 @@ public class WaveManager : MonoBehaviour
     {
         isWaveActive = true;
         waveTimer = 0F;
+        enemiesPerWave += Mathf.FloorToInt(currentWave * 3F);
         Debug.Log("Wave: " + (currentWave + 1));
     }
 
     void SpawnEnemy()
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
+        int enemyIndex = Random.Range(0, enemyPrefabs.Length);
 
         List<Transform> waypoints = waypointController.GetWaypoints();
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawnPoints[randomIndex].position, Quaternion.identity);
             activeEnemies.Add(enemy);
 
             EnemyAI ai = enemy.GetComponent<EnemyAI>();

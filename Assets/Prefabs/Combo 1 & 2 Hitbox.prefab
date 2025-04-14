@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 976829902371076124}
   - component: {fileID: 5314175374825763205}
   m_Layer: 6
-  m_Name: Combo 1 & 2
+  m_Name: Combo 1 & 2 Hitbox
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

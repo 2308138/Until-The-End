@@ -4,6 +4,7 @@ public class EnemyAI : MonoBehaviour
 {
     [Header("--- Misc Settings ---")]
     [SerializeField][HideInInspector] private Transform target;
+    [SerializeField][HideInInspector] private SpriteRenderer enemySprite;
 
     [Header("--- Movement Settings ---")]
     [SerializeField] public float moveSpeed = 0F;
@@ -14,12 +15,24 @@ public class EnemyAI : MonoBehaviour
     [SerializeField][HideInInspector] private float damageCooldown = 0.2F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
 
+    void Start()
+    {
+        enemySprite = GetComponentInChildren<SpriteRenderer>();
+    }
+
     void Update()
     {
         if (target == null)
             return;
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+
+        Vector2 moveDirection = (target.position - transform.position).normalized;
+
+        if (moveDirection.x > 0.1F)
+            enemySprite.flipX = false;
+        else if (moveDirection.x < 0.1F)
+            enemySprite.flipX = true;
     }
 
     public void SetTarget(Transform newTarget)
