@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6496017963527555758}
   - component: {fileID: 7310384019103163640}
+  - component: {fileID: 4986821772383540534}
   - component: {fileID: 8067874362066384662}
   m_Layer: 7
   m_Name: Regular Knight
@@ -80,6 +81,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7916667, y: 1.0833335}
   m_EdgeRadius: 0
+--- !u!50 &4986821772383540534
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2723636198046061843}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!114 &8067874362066384662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   enemySprite: {fileID: 0}
-  moveSpeed: 3
+  moveSpeed: 2.5
   currentHealth: 1
   damageCooldown: 0.2
   lastDamageTime: 0

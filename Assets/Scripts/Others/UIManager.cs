@@ -1,27 +1,37 @@
+using System.Collections.Generic;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [Header("--- Misc Settings ---")]
-    [SerializeField] public TextMeshProUGUI healthText;
-    [SerializeField] public TextMeshProUGUI waveText;
+    [SerializeField] public GameObject heartPrefab;
+    [SerializeField] public Transform heartContainer;
 
-    [SerializeField][HideInInspector] private PlayerCombat playerHealth;
-    [SerializeField][HideInInspector] private WaveManager waveManager;
+    [SerializeField][HideInInspector] private List<GameObject> heartImages = new List<GameObject>();
+    [SerializeField][HideInInspector] private PlayerCombat playerCombat;
 
     void Start()
     {
-        playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerCombat>();
-        waveManager = GameObject.FindObjectOfType<WaveManager>();
+        playerCombat = GameObject.FindWithTag("Player").GetComponent<PlayerCombat>();
+        UpdateHearts();
     }
 
-    void Update()
+    public void UpdateHearts()
     {
-        if (playerHealth != null)
-            healthText.text = "Health: " + playerHealth.currentHealth;
+        int currentHealth = playerCombat.currentHealth;
+        int maxHealth = playerCombat.maxHealth;
 
-        if (waveManager != null)
-            waveText.text = "Wave: " + waveManager.currentWave;
+        foreach (GameObject heart in heartImages)
+            Destroy(heart);
+
+        heartImages.Clear();
+
+        for (int i = 0; i < playerCombat.currentHealth; i++)
+        {
+            GameObject heart = Instantiate(heartPrefab, heartContainer);
+            heartImages.Add(heart);
+        }
     }
 }

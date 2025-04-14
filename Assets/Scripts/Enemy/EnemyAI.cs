@@ -29,10 +29,13 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 moveDirection = (target.position - transform.position).normalized;
 
-        if (moveDirection.x > 0.1F)
-            enemySprite.flipX = false;
-        else if (moveDirection.x < 0.1F)
-            enemySprite.flipX = true;
+        if (moveDirection.x > 0F)
+        {
+            if (moveDirection.x > 0.1F)
+                enemySprite.flipX = false;
+            else if (moveDirection.x < 0.1F)
+                enemySprite.flipX = true;
+        }
     }
 
     public void SetTarget(Transform newTarget)

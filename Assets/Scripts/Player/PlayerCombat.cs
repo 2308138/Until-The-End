@@ -13,18 +13,19 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private SwordController swordController;
     [SerializeField][HideInInspector] private PlayerController playerController;
     [SerializeField][HideInInspector] private CameraShake cameraShake;
+    [SerializeField][HideInInspector] private UIManager UIManager;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
     [SerializeField] public int currentCombo = 0;
     [SerializeField] public float lungeForce = 0F;
 
-    [SerializeField][HideInInspector] private int maxHealth = 5;
     [SerializeField][HideInInspector] private float damageCooldown = 1F;
     [SerializeField][HideInInspector] private float lastDamageTime = 0F;
     [SerializeField][HideInInspector] private float attackCooldown = 0.3F;
     [SerializeField][HideInInspector] private float lastAttackTime = -Mathf.Infinity;
 
+    [SerializeField][HideInInspector] public int maxHealth = 5;
     [SerializeField][HideInInspector] public bool isAttacking = false;
     [SerializeField][HideInInspector] public bool IsAttackingOnCooldown() { return Time.time < lastAttackTime + attackCooldown; }
 
@@ -36,9 +37,10 @@ public class PlayerCombat : MonoBehaviour
         swordController = GetComponentInChildren<SwordController>();
         playerController = GetComponent<PlayerController>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
+        UIManager = GameObject.FindWithTag("UI").GetComponent<UIManager>();
     }
 
-    void Update()
+        void Update()
     {
         if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !IsAttackingOnCooldown())
         {
@@ -111,7 +113,8 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Player Health: " + currentHealth);
+        UIManager.UpdateHearts();
+
         if (currentHealth <= 0)
             Die();
     }
