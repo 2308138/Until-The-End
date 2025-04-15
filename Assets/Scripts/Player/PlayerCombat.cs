@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -62,8 +63,8 @@ public class PlayerCombat : MonoBehaviour
             lastAttackTime = Time.time;
             currentCombo++;
 
-            if (playerController.lastMoveDirection != Vector2.zero)
-                playerController.playerRB.linearVelocity += playerController.lastMoveDirection * lungeForce;
+            playerController.playerRB.linearVelocity = Vector2.zero;
+            playerController.playerRB.linearVelocity += playerController.lastMoveDirection * lungeForce;
 
             int hitboxIndex = Mathf.Clamp(currentCombo - 1, 0, attackHitbox.Length - 1);
             GameObject attack = Instantiate(attackHitbox[hitboxIndex], playerTransform.position, Quaternion.identity);
@@ -125,5 +126,6 @@ public class PlayerCombat : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        SceneManager.LoadScene("MainMenu");
     }
 }

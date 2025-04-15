@@ -75,7 +75,6 @@ public class WaveManager : MonoBehaviour
             {
                 isWaveActive = false;
                 enemiesSpawned = 0;
-                currentWave++;
 
                 if (currentWave < totalWaves)
                     Invoke("StartNextWave", timeBetweenWaves);
