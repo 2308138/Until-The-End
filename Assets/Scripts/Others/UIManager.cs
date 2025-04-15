@@ -1,37 +1,56 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [Header("--- Misc Settings ---")]
-    [SerializeField] public GameObject heartPrefab;
-    [SerializeField] public Transform heartContainer;
-
     [SerializeField][HideInInspector] private List<GameObject> heartImages = new List<GameObject>();
-    [SerializeField][HideInInspector] private PlayerCombat playerCombat;
+    [SerializeField][HideInInspector] private WaveManager waveManager;
 
-    void Start()
+    [Header("--- Health UI Settings ---")]
+    [SerializeField] public GameObject heartPrefab;
+    [SerializeField] public Transform healthContainer;
+
+    [Header("--- Wave UI Settings ---")]
+    [SerializeField] public Image waveNumberImage;
+    [SerializeField] public Sprite tutorialSprite;
+    [SerializeField] public List<Sprite> waveNumberSprites;
+
+    private void Start()
     {
-        playerCombat = GameObject.FindWithTag("Player").GetComponent<PlayerCombat>();
-        UpdateHearts();
+        waveManager = FindObjectOfType<WaveManager>();
     }
 
-    public void UpdateHearts()
+    public void SetupHealthDisplay(int maxHealth)
     {
-        int currentHealth = playerCombat.currentHealth;
-        int maxHealth = playerCombat.maxHealth;
-
-        foreach (GameObject heart in heartImages)
+        foreach (var heart in heartImages)
             Destroy(heart);
 
         heartImages.Clear();
 
-        for (int i = 0; i < playerCombat.currentHealth; i++)
+        for (int i = 0; i < maxHealth; i++)
         {
-            GameObject heart = Instantiate(heartPrefab, heartContainer);
-            heartImages.Add(heart);
+            GameObject newHeart = Instantiate(heartPrefab, healthContainer);
+            heartImages.Add(newHeart);
         }
+    }
+
+    public void UpdateHealthDisplay(int currentHealth)
+    {
+        for (int i = 0; i < heartImages.Count; i++)
+            heartImages[i].SetActive(i < currentHealth);
+    }
+
+    public void UpdateWaveCounter()
+    {
+        if (waveManager.currentWave == 0)
+            waveNumberImage.sprite = tutorialSprite;
+        else if (waveManager.currentWave > 0 && waveManager.currentWave <= waveNumberSprites.Count)
+            waveNumberImage.sprite = waveNumberSprites[waveManager.currentWave - 1];
     }
 }

@@ -13,7 +13,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField][HideInInspector] private SwordController swordController;
     [SerializeField][HideInInspector] private PlayerController playerController;
     [SerializeField][HideInInspector] private CameraShake cameraShake;
-    [SerializeField][HideInInspector] private UIManager UIManager;
+    [SerializeField][HideInInspector] private UIManager uiManager;
 
     [Header("--- Combat Settings ---")]
     [SerializeField] public int currentHealth = 0;
@@ -37,12 +37,14 @@ public class PlayerCombat : MonoBehaviour
         swordController = GetComponentInChildren<SwordController>();
         playerController = GetComponent<PlayerController>();
         cameraShake = Camera.main.GetComponent<CameraShake>();
-        UIManager = GameObject.FindWithTag("UI").GetComponent<UIManager>();
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.SetupHealthDisplay(maxHealth);
+        uiManager.UpdateHealthDisplay(currentHealth);
     }
 
         void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K) && !isAttacking && !IsAttackingOnCooldown())
+        if (Input.GetKeyDown(KeyCode.Z) && !isAttacking && !IsAttackingOnCooldown())
         {
             HandleCombo();
             swordController.HandleAttackAnimations(playerController.lastMoveDirection);
@@ -54,7 +56,7 @@ public class PlayerCombat : MonoBehaviour
         if (currentCombo >= attackHitbox.Length)
             ResetCombo();
 
-        if (Input.GetKeyDown(KeyCode.K) && currentCombo <= (attackHitbox.Length))
+        if (Input.GetKeyDown(KeyCode.Z) && currentCombo <= (attackHitbox.Length))
         {
             isAttacking = true;
             lastAttackTime = Time.time;
@@ -113,6 +115,7 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        uiManager.UpdateHealthDisplay(currentHealth);
 
         if (currentHealth <= 0)
             Die();
