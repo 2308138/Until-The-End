@@ -68,6 +68,7 @@ public class PlayerCombat : MonoBehaviour
             int hitboxIndex = Mathf.Clamp(currentCombo - 1, 0, attackHitbox.Length - 1);
             GameObject attack = Instantiate(attackHitbox[hitboxIndex], playerTransform.position, Quaternion.identity);
             attack.transform.right = playerController.lastMoveDirection;
+            AudioManager.instance.PlaySFX(AudioManager.instance.attackClip);
 
             if (currentCombo == 1 || currentCombo == 2)
                 cameraShake.Shake(0.1F);

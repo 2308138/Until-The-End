@@ -55,6 +55,8 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        AudioManager.instance.PlaySFX(AudioManager.instance.enemyHitClip);
+
         if (currentHealth <= 0)
             Die();
     }
